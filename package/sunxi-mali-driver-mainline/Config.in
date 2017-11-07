@@ -1,0 +1,38 @@
+comment "sunxi-mali-driver-mainline needs a Linux kernel to be built"
+	depends on !BR2_LINUX_KERNEL
+
+config BR2_PACKAGE_SUNXI_MALI_DRIVER_MAINLINE
+	bool "sunxi-mali-driver-mainline"
+	depends on BR2_LINUX_KERNEL
+	select BR2_LINUX_NEEDS_MODULES # not using kernel-module infra
+	help
+	  This package builds and installs the Linux kernel driver for
+	  the Mali GPU on Allwinner platforms, compatible with recent
+	  Linux kernels (>= 4.4). Note that it should be installed
+	  together with the corresponding userspace OpenGL libraries,
+	  which are provided as binaries only at:
+	  https://github.com/free-electrons/mali-blobs
+
+	  sunxi-mali-driver-mainline requires a Linux kernel >= 4.4 with the
+	  following options enabled:
+
+	  - CONFIG_CMA
+	  - CONFIG_DMA_CMA
+	  - CONFIG_DRM_FBDEV_OVERALLOC >= 200 for double buffer or more
+
+	  https://github.com/mripard/sunxi-mali/blob/master/README.md
+
+if BR2_PACKAGE_SUNXI_MALI_DRIVER_MAINLINE
+
+choice
+	prompt "Version"
+	default BR2_PACKAGE_SUNXI_MALI_DRIVER_MAINLINE_R6P2
+	help
+	  Select the version of the kernel module.
+
+config BR2_PACKAGE_SUNXI_MALI_DRIVER_MAINLINE_R6P2
+	bool "r6p2"
+
+endchoice
+
+endif
