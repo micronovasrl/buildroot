@@ -245,6 +245,8 @@ ifeq ($(BR2_PACKAGE_IMX_GPU_VIV),y)
 QT5BASE_EGLFS_DEVICE = eglfs_viv
 else ifeq ($(BR2_PACKAGE_SUNXI_MALI),y)
 QT5BASE_EGLFS_DEVICE = eglfs_mali
+else ifeq ($(BR2_PACKAGE_SUNXI_MALI_MAINLINE),y)
+QT5BASE_EGLFS_DEVICE = eglfs_mali
 endif
 endif
 
